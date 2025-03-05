@@ -14,16 +14,18 @@ async function main() {
         id: 1,
         name: "Etiqueta",
         price: 8.99,
-        quantity: 30
+        quantity: 1
     }
     
     await cart.addItem(myCart, item1)
     await cart.addItem(myCart, item2)
-    console.log(myCart)
-    console.log(await cart.calcTotal(myCart))  
-    await cart.deleteItem(myCart, 0)
-    console.log(myCart)
-    console.log(await cart.calcTotal(myCart))
+    cart.displayCart(myCart)
+    await cart.removeItem(myCart, 1)
+    cart.displayCart(myCart)
+    // console.log(await cart.calcTotal(myCart))  
+    // await cart.deleteItem(myCart, 0)
+    // cart.displayCart(myCart)
+    // console.log(await cart.calcTotal(myCart))
 }
 
 main()

@@ -15,6 +15,7 @@ exports.addItem = addItem;
 exports.deleteItem = deleteItem;
 exports.removeItem = removeItem;
 exports.calcTotal = calcTotal;
+exports.displayCart = displayCart;
 const item_1 = require("./item");
 Object.defineProperty(exports, "calcSubTotal", { enumerable: true, get: function () { return item_1.calcSubTotal; } });
 // adicionar item
@@ -33,8 +34,23 @@ function deleteItem(userCart, id) {
     });
 }
 // diminuir um item
-function removeItem(userCart, item) {
+function removeItem(userCart, id) {
     return __awaiter(this, void 0, void 0, function* () {
+        const index = userCart.findIndex((item) => item.id == id);
+        if (index != -1) {
+            if (userCart[index].quantity == 1) {
+                yield deleteItem(userCart, id);
+            }
+            else {
+                userCart[index].quantity--;
+            }
+        }
+    });
+}
+function displayCart(userCart) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("\nShopee Cart List:");
+        userCart.forEach((element) => console.log(`${element.name} - ${element.price} - ${element.quantity}`));
     });
 }
 // calcular o total

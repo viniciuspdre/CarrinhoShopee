@@ -17,8 +17,21 @@ async function deleteItem(userCart:Item[], id: number) {
 }
 
 // diminuir um item
-async function removeItem(userCart:Item[], item: Item) {
-    
+async function removeItem(userCart:Item[], id: number) {
+    const index = userCart.findIndex((item) => item.id == id)
+
+    if(index != -1) {
+        if(userCart[index].quantity == 1) {
+            await deleteItem(userCart, id)
+        } else {
+            userCart[index].quantity--
+        }
+    }
+}
+
+async function displayCart(userCart:Item[]) {
+    console.log("\nShopee Cart List:")
+    userCart.forEach((element) => console.log(`${element.name} - ${element.price} - ${element.quantity}`))
 }
 
 // calcular o total
@@ -39,5 +52,6 @@ export {
     removeItem,
     calcTotal,
     Item,
-    calcSubTotal
+    calcSubTotal,
+    displayCart
 }
